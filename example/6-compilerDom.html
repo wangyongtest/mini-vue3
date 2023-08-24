@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>compilerDom</title>
+</head>
+<body>
+    <script src="../node_modules/@vue/compiler-dom/dist/compiler-dom.global.js"></script>
+    <div id="app"></div>
+
+
+    <script>
+        console.log(VueCompilerDOM);
+
+        //  vue3 可以写  render 函数 h('div') 并不好，
+        //  jsx ==> h('div') 并没有优化
+        //  vue3 template ==> render函数 具备优化特点 patchFlag blockTree
+
+        //  vue3 template ==> render函数 3个步骤   1、吧html 解析为抽象语法树 描述语法本身
+        //                                        2、转化ast树，加标记和进行优化(transform)
+        //                                        3、生成render函数(字符串拼接)
+
+
+
+        const { baseCompiler } = VueCompilerDOM
+
+        // 文本
+    //    const ast = baseCompiler(`hello`)
+    //    表达式
+    //    const ast = baseCompiler(`{{ name }}`)
+
+    // 标签
+    const ast = baseCompiler(`<div><p></p> hello {{name}}</div>`)
+       console.log(ast)
+
+    </script>
+</body>
+</html>

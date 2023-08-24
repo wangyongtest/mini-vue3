@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../node_modules/@vue/reactivity/dist/reactivity.global.js"></script>
+
+    <script type="module">
+      let {
+        ref,
+        reactive,
+        shallowReactive,
+        readonly,
+        shallowReadonly,
+        computed,
+        effect,
+      } = VueReactivity;
+
+      let age = ref(18);
+      const myAge = computed(() => {
+        console.log("runner");
+        return age.value + 10;
+      });
+
+      //   console.log(myAge.value);
+      //   console.log(myAge.value);
+      //   age.value = 100;
+      //   console.log(myAge.value);
+
+      effect(() => {
+        console.log(myAge.value);
+      });
+      age.value = 500;
+    </script>
+  </body>
+</html>

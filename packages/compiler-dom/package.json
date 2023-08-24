@@ -1,0 +1,13 @@
+{
+  "name": "@vue/compiler-dom",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "module": "dist/compilerDOM.esm-bundler.js",
+  "buildOptions": {
+    "name": "VueCompilerDOM",
+    "formats": [
+      "global"
+    ]
+  }
+}

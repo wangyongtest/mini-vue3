@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>runtime-dom</title>
+  </head>
+  <body>
+    <script src="../node_modules/@vue/runtime-dom/dist/runtime-dom.global.js"></script>
+    <div id="app"></div>
+    <script>
+      //
+      let { createApp, renderOptions, h, reactive } = VueRuntimeDOM;
+      let App = {
+        setup(props, context) {
+          const state = reactive({ flag: true });
+          setTimeout(() => {
+            state.flag = false;
+          }, 3000);
+
+          // console.log("ok", props, context);
+          // return (proxy) => {
+          //   console.log("setup render");
+          // };
+          // return { a: 1 };
+          // return (proxy) => {
+          //   return h(
+          //     "div",
+          //     {
+          //       style: { color: "red", border: "1px solid red" },
+
+          //       onClick: () => {
+          //         alert("11");
+          //       },
+          //     },
+          //     ["hello word", "two"]
+          //   );
+          // };
+          return () => {
+            return state.flag
+              ? h("div", { style: { color: "red" } }, "first")
+              : h("div", { style: { color: "black" } }, "second");
+          };
+        },
+        // render(proxy) {
+        //   console.log("component render");
+        // },
+      };
+
+      //  将组件 编变成 vnode --> 再将vnode 变成真是dom ---->插到页面上
+      // render 方法的作用可以渲染一个虚拟节点，将它挂在到具体的dom元素上
+      //  vue3 的执行的核心就在patch 这个方法上
+
+      // 一、组件创造过程中
+      // 1、创造一个instance ---> 初始话
+      // 2、根据用户传入的组件，拿到对应的内容，来填充这个instance对象
+      // 3、创建effect 并调用render方法，数据会将对应的 effect 收集起来
+      // 4、拿到 render 方法返回结果，再次走渲染流程==>patch
+
+      //组件的渲染顺序， 先父后子， 深度优先遍历
+      // 每个组件都是一个effect函数
+      createApp(App, { name: "text" }).mount("#app");
+    </script>
+  </body>
+</html>

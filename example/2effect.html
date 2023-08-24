@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../node_modules/@vue/reactivity/dist/reactivity.global.js"></script>
+    <div id="app"></div>
+    <script type="module">
+      let { effect, reactive } = VueReactivity;
+
+      const state = reactive({ name: "test", age: "123", arr: [1, 2, 34] });
+
+      effect(() => {
+        // app.innerHTML = `name${state.name}-age${state.age}`;
+        // app.innerHTML = state.arr.length;
+        app.innerHTML = state.arr;
+      });
+
+      setTimeout(() => {
+        // state.age = "999";
+        // state.arr[2] = 10;
+        // state.arr.length = 20;
+        // state.arr.length = 1;
+        state.arr[100] = 1;
+      }, 1000);
+      // 1、effect 中的所有属性都会收集effect
+      // 2、当这个属性值发生时，会重新执行effect
+    </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script src="../node_modules/@vue/reactivity/dist/reactivity.global.js"></script>
+    <div id="app"></div>
+    <script>
+      let { effect, ref, shallowRef } = VueReactivity;
+
+      let name = ref("名称");
+
+      console.log(name);
+      effect(() => {
+        app.innerHTML = name.value;
+      });
+
+      setTimeout(() => {
+        name.value = "名称已修改";
+      }, 1000);
+    </script>
+  </body>
+</html>
